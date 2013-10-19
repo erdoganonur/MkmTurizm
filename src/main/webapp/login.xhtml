@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Programmatic Login</title>
+    </h:head>
+    <h:body>
+        
+        <center>
+            <h2>This is a personal web site. Please, don't try to login, If you don't have any relation with it. </h2>
+        <h:form >
+            <p:panel header="Login Form" footer="Enter username and password to login" 
+                     style="width: 350px; alignment-baseline:  middle; vertical-align: central">
+            <h:messages showDetail="true" />
+            <h:panelGrid columns="2" cellpadding="2" cellspacing="2">
+                <h:outputLabel value="User name"/>
+                <p:inputText value="#{loginBean.username}" size="20"/>
+                
+                <h:outputLabel value="Password"/>
+                <p:password value="#{loginBean.password}" size="20"/>
+                
+                <h:outputLabel/>
+                <p:selectBooleanCheckbox value="#{loginBean.rememberMe}" />
+                
+                <h:outputLabel />
+                <p:commandButton action="#{loginBean.login()}" value="Login"/>
+                
+            </h:panelGrid>
+            </p:panel>
+        </h:form>
+        </center>
+    </h:body>
+</html>
