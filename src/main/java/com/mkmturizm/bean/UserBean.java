@@ -5,6 +5,7 @@
 package com.mkmturizm.bean;
 
 import com.mkmturizm.entity.Groups;
+import com.mkmturizm.entity.Person;
 import com.mkmturizm.entity.Users;
 import com.mkmturizm.service.GroupService;
 import com.mkmturizm.service.UserService;
@@ -27,8 +28,9 @@ import javax.inject.Named;
 public class UserBean implements Serializable {
 
     private Users user = new Users();
+    private Person person = new Person();
+    private List<Person> personList = new ArrayList<Person>();
     private List<Groups> groupList = new ArrayList<Groups>();
-    
     @Inject
     UserService userService;
     @Inject
@@ -36,11 +38,11 @@ public class UserBean implements Serializable {
 
     public void persist() throws Exception
     {
-        System.out.println("Kullanici veritabanina kaydediliyor.");
-        System.out.println(groupList.get(0).getGroupName());
-
+        personList.add(person);
+        user.setPersonList(personList);
         userService.persist(user);
         user = new Users();
+        person = new Person();
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Kayıt başarıyla gerçeklerşti", ""));
     }
@@ -70,5 +72,15 @@ public class UserBean implements Serializable {
     public void setUser(Users user)
     {
         this.user = user;
+    }
+
+    public Person getPerson()
+    {
+        return person;
+    }
+
+    public void setPerson(Person person)
+    {
+        this.person = person;
     }
 }

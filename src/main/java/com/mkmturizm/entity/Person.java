@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,30 +34,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 {
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
     @NamedQuery(name = "Person.findByPersonId", query = "SELECT p FROM Person p WHERE p.personId = :personId"),
+    @NamedQuery(name = "Person.findByDateOfBirth", query = "SELECT p FROM Person p WHERE p.dateOfBirth = :dateOfBirth"),
     @NamedQuery(name = "Person.findByName", query = "SELECT p FROM Person p WHERE p.name = :name"),
-    @NamedQuery(name = "Person.findByMiddleName", query = "SELECT p FROM Person p WHERE p.middleName = :middleName"),
-    @NamedQuery(name = "Person.findBySurname", query = "SELECT p FROM Person p WHERE p.surname = :surname"),
-    @NamedQuery(name = "Person.findByDateOfBirth", query = "SELECT p FROM Person p WHERE p.dateOfBirth = :dateOfBirth")
+    @NamedQuery(name = "Person.findBySurname", query = "SELECT p FROM Person p WHERE p.surname = :surname")
 })
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "person_id")
     private Integer personId;
-    @Size(max = 100)
-    @Column(name = "name")
-    private String name;
-    @Size(max = 100)
-    @Column(name = "middle_name")
-    private String middleName;
-    @Size(max = 2147483647)
-    @Column(name = "surname")
-    private String surname;
     @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
+    @Size(max = 255)
+    @Column(name = "name")
+    private String name;
+    @Size(max = 255)
+    @Column(name = "surname")
+    private String surname;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne
     private Users userId;
@@ -79,6 +77,16 @@ public class Person implements Serializable {
         this.personId = personId;
     }
 
+    public Date getDateOfBirth()
+    {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth)
+    {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public String getName()
     {
         return name;
@@ -89,16 +97,6 @@ public class Person implements Serializable {
         this.name = name;
     }
 
-    public String getMiddleName()
-    {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName)
-    {
-        this.middleName = middleName;
-    }
-
     public String getSurname()
     {
         return surname;
@@ -107,16 +105,6 @@ public class Person implements Serializable {
     public void setSurname(String surname)
     {
         this.surname = surname;
-    }
-
-    public Date getDateOfBirth()
-    {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth)
-    {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public Users getUserId()

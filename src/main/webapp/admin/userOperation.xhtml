@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -16,8 +12,8 @@ and open the template in the editor.
             <p:panel header="Kullanıcı Tanımlama">
                 <p:messages autoUpdate="true"/>
                 <h:panelGrid columns="2">
-                    Adı:<p:inputText value="#{userBean.user.name}"/>
-                    Soyadı : <p:inputText value="#{userBean.user.surname}"/>
+                    Adı:<p:inputText value="#{userBean.person.name}"/>
+                    Soyadı : <p:inputText value="#{userBean.person.surname}"/>
                     Kullanıcı Adı : <p:inputText value="#{userBean.user.username}"/>
                     E-mail: <p:inputText value="#{userBean.user.email}"/>
                     Parola : <p:password value="#{userBean.user.password}"/>

@@ -9,7 +9,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,8 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 {
     @NamedQuery(name = "Groups.findAll", query = "SELECT g FROM Groups g"),
     @NamedQuery(name = "Groups.findByGroupId", query = "SELECT g FROM Groups g WHERE g.groupId = :groupId"),
-    @NamedQuery(name = "Groups.findByGroupName", query = "SELECT g FROM Groups g WHERE g.groupName = :groupName"),
-    @NamedQuery(name = "Groups.findByGroupDescription", query = "SELECT g FROM Groups g WHERE g.groupDescription = :groupDescription")
+    @NamedQuery(name = "Groups.findByGroupDescription", query = "SELECT g FROM Groups g WHERE g.groupDescription = :groupDescription"),
+    @NamedQuery(name = "Groups.findByGroupName", query = "SELECT g FROM Groups g WHERE g.groupName = :groupName")
 })
 public class Groups implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -44,20 +43,20 @@ public class Groups implements Serializable {
     @Basic(optional = false)
     @Column(name = "group_id")
     private Integer groupId;
-    @Size(max = 2147483647)
-    @Column(name = "group_name")
-    private String groupName;
-    @Size(max = 2147483647)
+    @Size(max = 255)
     @Column(name = "group_description")
     private String groupDescription;
-    @JoinTable(name = "user_group", joinColumns =
+    @Size(max = 255)
+    @Column(name = "group_name")
+    private String groupName;
+    @JoinTable(name = "user_group",  joinColumns =
     {
         @JoinColumn(name = "group_id", referencedColumnName = "group_id")
     }, inverseJoinColumns =
     {
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     })
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Users> usersList;
 
     public Groups()
@@ -79,16 +78,6 @@ public class Groups implements Serializable {
         this.groupId = groupId;
     }
 
-    public String getGroupName()
-    {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName)
-    {
-        this.groupName = groupName;
-    }
-
     public String getGroupDescription()
     {
         return groupDescription;
@@ -97,6 +86,16 @@ public class Groups implements Serializable {
     public void setGroupDescription(String groupDescription)
     {
         this.groupDescription = groupDescription;
+    }
+
+    public String getGroupName()
+    {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName)
+    {
+        this.groupName = groupName;
     }
 
     @XmlTransient

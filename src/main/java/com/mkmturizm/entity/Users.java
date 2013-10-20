@@ -33,11 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
 {
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
     @NamedQuery(name = "Users.findByUserId", query = "SELECT u FROM Users u WHERE u.userId = :userId"),
-    @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name"),
-    @NamedQuery(name = "Users.findBySurname", query = "SELECT u FROM Users u WHERE u.surname = :surname"),
     @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
-    @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
-    @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
+    @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
+    @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username")
 })
 public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -46,25 +44,19 @@ public class Users implements Serializable {
     @Basic(optional = false)
     @Column(name = "user_id")
     private Integer userId;
-    @Size(max = 2147483647)
-    @Column(name = "name")
-    private String name;
-    @Size(max = 2147483647)
-    @Column(name = "surname")
-    private String surname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 2147483647)
+    @Size(max = 255)
     @Column(name = "email")
     private String email;
-    @Size(max = 2147483647)
-    @Column(name = "username")
-    private String username;
-    @Size(max = 2147483647)
+    @Size(max = 255)
     @Column(name = "password")
     private String password;
+    @Size(max = 255)
+    @Column(name = "username")
+    private String username;
     @ManyToMany(mappedBy = "usersList")
     private List<Groups> groupsList;
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.PERSIST)
     private List<Person> personList;
 
     public Users()
@@ -86,26 +78,6 @@ public class Users implements Serializable {
         this.userId = userId;
     }
 
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public String getSurname()
-    {
-        return surname;
-    }
-
-    public void setSurname(String surname)
-    {
-        this.surname = surname;
-    }
-
     public String getEmail()
     {
         return email;
@@ -116,16 +88,6 @@ public class Users implements Serializable {
         this.email = email;
     }
 
-    public String getUsername()
-    {
-        return username;
-    }
-
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
-
     public String getPassword()
     {
         return password;
@@ -134,6 +96,16 @@ public class Users implements Serializable {
     public void setPassword(String password)
     {
         this.password = password;
+    }
+
+    public String getUsername()
+    {
+        return username;
+    }
+
+    public void setUsername(String username)
+    {
+        this.username = username;
     }
 
     @XmlTransient
