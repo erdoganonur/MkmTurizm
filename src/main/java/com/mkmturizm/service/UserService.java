@@ -5,6 +5,7 @@
 package com.mkmturizm.service;
 
 import com.mkmturizm.dao.UserDAO;
+import com.mkmturizm.entity.Person;
 import com.mkmturizm.entity.Users;
 import java.io.Serializable;
 import java.util.List;
@@ -28,6 +29,8 @@ public class UserService implements Serializable{
     public void persist(Users user) throws Exception {
       System.out.println(user.getGroupsList().get(0).getGroupName());
       userDAO.persist(user);
+//      userDAO.flush();
+//      userDAO.merge(user);
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)

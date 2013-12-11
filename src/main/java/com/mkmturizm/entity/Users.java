@@ -54,9 +54,9 @@ public class Users implements Serializable {
     @Size(max = 255)
     @Column(name = "username")
     private String username;
-    @ManyToMany(mappedBy = "usersList")
+    @ManyToMany(mappedBy = "usersList", cascade = CascadeType.ALL)
     private List<Groups> groupsList;
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Person> personList;
 
     public Users()

@@ -30,5 +30,10 @@ public abstract class GenericDAO<E> implements Serializable{
 		object = entityManager.merge(object);
 		entityManager.remove(object);
 	}
+        
+        public void flush()
+        {
+            entityManager.flush();
+        }
 	
 }

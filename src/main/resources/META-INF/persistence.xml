@@ -9,11 +9,20 @@
             <property name="javax.persistence.jdbc.password" value="214365"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="javax.persistence.jdbc.user" value="onur"/>-->
+      <!--      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="jboss.entity.manager.factory.jndi.name" value="java:/MkmEntityManagerFactory"/>-->
       <property name="org.eclipse.entity.manager.factory.jndi.name" value="java:/MkmEntityManagerFactory"/>
-      <property name="eclipselink.logging.logger" value="ServerLogger"/>
-      <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.weaving" value="static"/>
+      <property name="eclipselink.logging.logger" value="DefaultLogger"/>
       <property name="eclipselink.logging.level.sql" value="FINE"/>
+      <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.logging.level.cache" value="FINE"/>
       <property name="eclipselink.logging.parameters" value="true"/>
+      <property name="eclipselink.logging.exceptions" value="true"/>
+      <property name="eclipselink.ddl-generation.output-mode" value="sql-script"/>
     </properties>
   </persistence-unit>
 </persistence>
