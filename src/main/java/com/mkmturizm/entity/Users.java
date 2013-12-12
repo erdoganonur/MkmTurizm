@@ -1,7 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.mkmturizm.entity;
 
 import java.io.Serializable;
@@ -13,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -54,7 +58,15 @@ public class Users implements Serializable {
     @Size(max = 255)
     @Column(name = "username")
     private String username;
-    @ManyToMany(mappedBy = "usersList", cascade = CascadeType.ALL)
+    
+    @JoinTable(name = "user_group", joinColumns =
+    {
+        @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    }, inverseJoinColumns =
+    {
+        @JoinColumn(name = "group_id", referencedColumnName = "group_id")
+    })
+    @ManyToMany
     private List<Groups> groupsList;
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Person> personList;

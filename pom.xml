@@ -124,12 +124,7 @@
             <id>PrimeFaces-maven-lib</id>
             <layout>default</layout>
             <name>Repository for library PrimeFaces-maven-lib</name>
-        </repository>
-        <repository>
-            <id>java.net</id>
-            <name>java.net</name>
-            <url>http://download.java.net/maven/2/</url>
-        </repository>
+        </repository>   
         <repository>
             <id>JBoss repository</id>
             <url>http://repository.jboss.org/nexus/</url>

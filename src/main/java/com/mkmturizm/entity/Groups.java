@@ -1,12 +1,15 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.mkmturizm.entity;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,14 +52,7 @@ public class Groups implements Serializable {
     @Size(max = 255)
     @Column(name = "group_name")
     private String groupName;
-    @JoinTable(name = "user_group",  joinColumns =
-    {
-        @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-    }, inverseJoinColumns =
-    {
-        @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    })
-    @ManyToMany
+    @ManyToMany(mappedBy = "groupsList")
     private List<Users> usersList;
 
     public Groups()
