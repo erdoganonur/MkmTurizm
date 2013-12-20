@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mkmturizm.bean;
 
 import java.io.Serializable;
@@ -23,10 +19,11 @@ import org.apache.shiro.subject.Subject;
  */
 @ManagedBean
 @SessionScoped
-public class LoginBean implements Serializable{
+public class LoginBean implements Serializable {
 
     private String username, password;
     private boolean rememberMe;
+    private Subject currentUser;
 
     public String getUsername()
     {
@@ -58,7 +55,7 @@ public class LoginBean implements Serializable{
         this.rememberMe = rememberMe;
     }
 
-    public String login()
+    public String loginAsUser()
     {
         String returnPage = null;
 
@@ -66,15 +63,73 @@ public class LoginBean implements Serializable{
         {
             returnPage = "/login.xhtml?faces-redirect=true";
 
-            Subject currentUser = SecurityUtils.getSubject();
-            UsernamePasswordToken token =
-                    new UsernamePasswordToken(username, password);
+            currentUser = SecurityUtils.getSubject();
+            UsernamePasswordToken token
+                    = new UsernamePasswordToken(username, password);
 
             token.setRememberMe(rememberMe);
 
             System.out.println(username + " " + password);
 
             currentUser.login(token);
+
+            System.out.println(currentUser.getPrincipals());
+
+            if (currentUser.hasRole("user"))
+            {
+                returnPage = "#";
+            } else
+            {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Error", "Please check out your username and password"));
+                System.out.println("What's happening ??");
+                //return returnPage;
+            }
+
+        } catch (UnknownAccountException uae)
+        {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Giriş başarısız", "kullanıcı adınız yanlış"));
+            return null;
+        } catch (IncorrectCredentialsException ice)
+        {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Giriş başarısız", "parolanız yanlış"));
+            return null;
+        } catch (LockedAccountException lae)
+        {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Giriş başarısız", "Bu kullanıcı adı kilitli"));
+            return null;
+        } catch (AuthenticationException aex)
+        {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Giriş başarısız", aex.toString()));
+            return null;
+        }
+
+        return returnPage;
+    }
+
+    public String loginAsAdmin()
+    {
+        String returnPage = null;
+
+        try
+        {
+            returnPage = "/login.xhtml?faces-redirect=true";
+
+            currentUser = SecurityUtils.getSubject();
+            UsernamePasswordToken token
+                    = new UsernamePasswordToken(username, password);
+
+            token.setRememberMe(rememberMe);
+
+            System.out.println(username + " " + password);
+
+            currentUser.login(token);
+
+            System.out.println(currentUser.getPrincipals());
 
             if (currentUser.hasRole("admin"))
             {
@@ -111,4 +166,17 @@ public class LoginBean implements Serializable{
 
         return returnPage;
     }
+
+    public boolean isLoggedIn()
+    {
+        if (currentUser == null)
+        {
+            return false;
+        } else
+        {
+            return currentUser.isAuthenticated();
+        }
+    }
+
+    
 }
