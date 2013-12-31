@@ -12,12 +12,22 @@
             <p:panel header="Kullanıcı Tanımlama">
                 <p:messages autoUpdate="true"/>
                 <h:panelGrid columns="2">
-                    Adı:<p:inputText value="#{userBean.person.name}"/>
-                    Soyadı : <p:inputText value="#{userBean.person.surname}"/>
-                    Kullanıcı Adı : <p:inputText value="#{userBean.user.username}"/>
-                    E-mail: <p:inputText value="#{userBean.user.email}"/>
-                    Parola : <p:password value="#{userBean.user.password}"/>
-                    Kullanıcı Tipi: 
+                    <h:outputText value="Adı:" />
+                    <p:inputText value="#{userBean.person.name}"/>
+                    
+                    <h:outputText value="Soyadı :" />
+                    <p:inputText value="#{userBean.person.surname}"/>
+                    
+                    <h:outputText value="Kullanıcı Adı :" />
+                    <p:inputText value="#{userBean.user.username}"/>
+                    
+                    <h:outputText value="E-mail:" /> 
+                    <p:inputText value="#{userBean.user.email}"/>
+                    
+                    <h:outputText value="Parola :" /> 
+                    <p:password value="#{userBean.user.password}"/>
+                    
+                    <h:outputText value="Kullanıcı Tipi:" />
                     <p:selectManyCheckbox value="#{userBean.user.groupsList}" converter="#{groupConverter}">
                         <f:selectItems value="#{userBean.groupList}" var="grp" itemLabel="#{grp.groupName}" itemValue="#{grp}"/>
                     </p:selectManyCheckbox>
@@ -26,6 +36,27 @@
 
                 </h:panelGrid>
             </p:panel>
+        </h:form>
+        
+        <h:form id="userTable">
+            <p:dataTable var="usr" value="#{userBean.userList}">
+                <p:column headerText="Kullanıcı Numarası">
+                    <h:outputText value="#{usr.userId}"/>
+                </p:column>
+                
+                <p:column headerText="E-Mail">
+                    <h:outputText value="#{usr.email}"/>
+                </p:column>
+                
+                <p:column headerText="Kullanıcı Adı">
+                    <h:outputText value="#{usr.username}"/>
+                </p:column>
+                
+                <p:column headerText="Parola">
+                    <h:outputText value="#{usr.password}"/>
+                </p:column>
+                
+            </p:dataTable>
         </h:form>
     </h:body>
 </html>

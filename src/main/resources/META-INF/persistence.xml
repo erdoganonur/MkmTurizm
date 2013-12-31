@@ -6,6 +6,7 @@
     <class>com.mkmturizm.entity.Groups</class>
     <class>com.mkmturizm.entity.Person</class>
     <class>com.mkmturizm.entity.Users</class>
+    <class>com.mkmturizm.entity.Content</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/mkm"/>

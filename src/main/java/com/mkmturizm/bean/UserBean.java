@@ -31,6 +31,9 @@ public class UserBean implements Serializable {
     private Person person = new Person();
     private List<Person> personList = new ArrayList<Person>();
     private List<Groups> groupList = new ArrayList<Groups>();
+    private List<Users> userList = new ArrayList<Users>();
+
+    
     @Inject
     UserService userService;
     @Inject
@@ -48,10 +51,20 @@ public class UserBean implements Serializable {
     }
 
     @PostConstruct
+    public void init()
+    {
+        this.getAllGroups();
+        this.getAllUsers();
+    }
+    
     public void getAllGroups()
     {
-        System.out.println("PostConstruct");
         groupList = groupService.groupsList();
+    }
+    
+    public void getAllUsers()
+    {
+        userList = userService.users();
     }
 
     public List<Groups> getGroupList()
@@ -82,5 +95,45 @@ public class UserBean implements Serializable {
     public void setPerson(Person person)
     {
         this.person = person;
+    }
+    
+    public List<Person> getPersonList()
+    {
+        return personList;
+    }
+
+    public void setPersonList(List<Person> personList)
+    {
+        this.personList = personList;
+    }
+
+    public List<Users> getUserList()
+    {
+        return userList;
+    }
+
+    public void setUserList(List<Users> userList)
+    {
+        this.userList = userList;
+    }
+
+    public UserService getUserService()
+    {
+        return userService;
+    }
+
+    public void setUserService(UserService userService)
+    {
+        this.userService = userService;
+    }
+
+    public GroupService getGroupService()
+    {
+        return groupService;
+    }
+
+    public void setGroupService(GroupService groupService)
+    {
+        this.groupService = groupService;
     }
 }

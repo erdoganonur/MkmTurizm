@@ -7,8 +7,6 @@ package com.mkmturizm.dao;
 import com.mkmturizm.entity.Users;
 import java.io.Serializable;
 import java.util.List;
-import javax.ejb.Stateful;
-import javax.enterprise.context.Dependent;
 import javax.persistence.Query;
 
 /**

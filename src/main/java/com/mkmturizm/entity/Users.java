@@ -71,6 +71,9 @@ public class Users implements Serializable {
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<Person> personList;
 
+    @OneToMany(mappedBy = "modifiedUserId")
+    private List<Content> contentList;
+    
     public Users()
     {
     }
@@ -142,6 +145,17 @@ public class Users implements Serializable {
         this.personList = personList;
     }
 
+    @XmlTransient
+    public List<Content> getContentList()
+    {
+        return contentList;
+    }
+
+    public void setContentList(List<Content> contentList)
+    {
+        this.contentList = contentList;
+    }
+    
     @Override
     public int hashCode()
     {
@@ -171,5 +185,7 @@ public class Users implements Serializable {
     {
         return "com.mkmturizm.entity.Users[ userId=" + userId + " ]";
     }
+
+    
     
 }
