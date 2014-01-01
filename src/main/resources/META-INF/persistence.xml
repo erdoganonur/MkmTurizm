@@ -7,17 +7,8 @@
     <class>com.mkmturizm.entity.Person</class>
     <class>com.mkmturizm.entity.Users</class>
     <class>com.mkmturizm.entity.Content</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
-      <!--            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/mkm"/>
-            <property name="javax.persistence.jdbc.password" value="214365"/>
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="onur"/>-->
-      <!--      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
-      <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.format_sql" value="true"/>
-      <property name="jboss.entity.manager.factory.jndi.name" value="java:/MkmEntityManagerFactory"/>-->
       <property name="org.eclipse.entity.manager.factory.jndi.name" value="java:/MkmEntityManagerFactory"/>
       <property name="eclipselink.weaving" value="static"/>
       <property name="eclipselink.logging.logger" value="DefaultLogger"/>
