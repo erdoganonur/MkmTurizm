@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title><h:outputText value="İçerik Düzenle" /></title>
+    </h:head>
+    <body>
+        <h:form>
+            <div id="navigation" class="block">
+                <p:toolbar id="tb">
+                    <p:toolbarGroup align="left">
+                        <p:commandButton value="Anasayfa" action="#{contentAdminBean.findContentById(1)}" update="@form"/>
+                        <p:commandButton value="Hakkımızda" action="#{contentAdminBean.findContentById(2)}" update="@form"/>
+                        <p:commandButton value="Bilgilendirme" action="#{contentAdminBean.findContentById(3)}" update="@form"/>
+                        <p:commandButton value="Örnek Sayfa" action="#{contentAdminBean.findContentById(4)}" update="@form"/>
+                        <p:commandButton value="İletişim" action="#{contentAdminBean.findContentById(5)}" update="@form" styleClass="last"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+                <p:sticky target="tb"/>
+
+                <div class="clear"></div>
+            </div>
+            <div>
+                <h:form id="editorForm">
+                    <p:editor value="#{contentAdminBean.content.contentHtml}" />
+                    <p:commandButton value="Kaydet" action="#{contentAdminBean.updateContent()}" update="@form"/>
+                </h:form>
+            </div>
+        </h:form>
+    </body>
+</html>

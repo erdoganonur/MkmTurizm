@@ -14,80 +14,92 @@
     </h:head>
 
     <h:body>
-        <div id="topBar" class="topBar"></div>
-        <div id="mainHolder" class="limitedBlock">
-            <div id="topHolder">
-                <a href="home.xhtml"><h:graphicImage value="/resources/img/logo-s.png" alt="Logo"/></a>
-                <div id="userBlock">
-                    <h:form id="form">
-                        <p:panel rendered="#{!loginBean.loggedIn}">
-                            <h:panelGrid columns="2" cellpadding="4" cellspacing="2">
-                                <h:outputLabel value="Email"/>
-                                <p:inputText value="#{loginBean.username}" size="20"/>
+        <h:form>
+            <div id="topBar" class="topBar"></div>
+            <div id="mainHolder" class="limitedBlock">
+                <div id="topHolder">
+                    <a href="home.xhtml"><h:graphicImage value="/resources/img/logo-s.png" alt="Logo"/></a>
 
-                                <h:outputLabel value="Parola"/>
-                                <p:password value="#{loginBean.password}" size="20"/>
+                    <!--Login Form Start-->
+                    <div id="userBlock">
+                        <h:form id="form">
+                            <p:panel rendered="#{!loginBean.loggedIn}">
+                                <h:panelGrid columns="2" cellpadding="4" cellspacing="2">
+                                    <h:outputLabel value="Email"/>
+                                    <p:inputText value="#{loginBean.username}" size="20"/>
 
-                                <p:commandLink value="Üye Ol" onclick="PF('dlg1').show();" />
-                                <p:commandButton action="#{loginBean.loginAsUser()}" value="Giriş" update="@form"/>
-                            </h:panelGrid>
-                        </p:panel>
-                        <h:outputText value="Hoş geldin, #{loginBean.username} " rendered="#{loginBean.loggedIn}" />
-                        <p:commandLink value="Çıkış Yap" rendered="#{loginBean.loggedIn}" /> 
+                                    <h:outputLabel value="Parola"/>
+                                    <p:password value="#{loginBean.password}" size="20"/>
 
-                        <p:dialog id="basicDialog" header="Üye Ol" widgetVar="dlg1" modal="true">
-                            <h:form id="userDialog">
-                                <p:messages autoUpdate="true"/>
-                                <h:panelGrid columns="2">
-                                    <h:outputLabel value="Adı:"/> 
-                                    <p:inputText value="#{userBean.person.name}"/>
-                                    
-                                    <h:outputLabel value="Soyadı :"/> 
-                                    <p:inputText value="#{userBean.person.surname}"/>
-
-                                    <h:outputLabel value="Kullanıcı Adı :"/> 
-                                    <p:inputText value="#{userBean.user.username}"/>
-
-                                    <h:outputLabel value="E-mail:"/> 
-                                    <p:inputText value="#{userBean.user.email}"/>
-
-                                    <h:outputLabel for="pwd1" value="Password 1: *" />  
-                                    <p:password id="pwd1" value="#{userBean.user.password}" match="pwd2" label="Password 1" required="true" feedback="true"   
-                                                promptLabel="Lütfen şifre giriniz" weakLabel="Zayıf"  
-                                                goodLabel="Orta seviye" strongLabel="Güçlü" />    
-
-                                    <h:outputLabel for="pwd2" value="Password 2: *" />  
-                                    <p:password id="pwd2" value="#{userBean.user.password}" label="Password 2" required="true" />
-
-                                    <h:outputLabel value="Kullanıcı Tipi:"/> 
-                                    <p:selectManyCheckbox value="#{userBean.user.groupsList}" converter="#{groupConverter}">
-                                        <f:selectItems value="#{userBean.groupList}" var="grp" itemLabel="#{grp.groupName}" itemValue="#{grp}"/>
-                                    </p:selectManyCheckbox>
-
-                                    <p:commandButton value="Kullanıcıyı Ekle" action="#{userBean.persist()}" ajax="false" />
-
+                                    <p:commandLink value="Üye Ol" onclick="PF('dlg1').show();" />
+                                    <p:commandButton action="#{loginBean.loginAsUser()}" value="Giriş" update="@form"/>
                                 </h:panelGrid>
-                            </h:form>
-                        </p:dialog>
-                    </h:form>
+                            </p:panel>
+                            <h:outputText value="Hoş geldin, #{loginBean.username} " rendered="#{loginBean.loggedIn}" />
+                            <p:commandLink value="Çıkış Yap" rendered="#{loginBean.loggedIn}" /> 
+
+                            <p:dialog id="basicDialog" header="Üye Ol" widgetVar="dlg1" modal="true">
+                                <h:form id="userDialog">
+                                    <p:messages autoUpdate="true"/>
+                                    <h:panelGrid columns="2">
+                                        <h:outputLabel value="Adı:"/> 
+                                        <p:inputText value="#{userBean.person.name}"/>
+
+                                        <h:outputLabel value="Soyadı :"/> 
+                                        <p:inputText value="#{userBean.person.surname}"/>
+
+                                        <h:outputLabel value="Kullanıcı Adı :"/> 
+                                        <p:inputText value="#{userBean.user.username}"/>
+
+                                        <h:outputLabel value="E-mail:"/> 
+                                        <p:inputText value="#{userBean.user.email}"/>
+
+                                        <h:outputLabel for="pwd1" value="Password 1: *" />  
+                                        <p:password id="pwd1" value="#{userBean.user.password}" match="pwd2" label="Password 1" required="true" feedback="true"   
+                                                    promptLabel="Lütfen şifre giriniz" weakLabel="Zayıf"  
+                                                    goodLabel="Orta seviye" strongLabel="Güçlü" />    
+
+                                        <h:outputLabel for="pwd2" value="Password 2: *" />  
+                                        <p:password id="pwd2" value="#{userBean.user.password}" label="Password 2" required="true" />
+
+                                        <h:outputLabel value="Kullanıcı Tipi:"/> 
+                                        <p:selectManyCheckbox value="#{userBean.user.groupsList}" converter="#{groupConverter}">
+                                            <f:selectItems value="#{userBean.groupList}" var="grp" itemLabel="#{grp.groupName}" itemValue="#{grp}"/>
+                                        </p:selectManyCheckbox>
+
+                                        <p:commandButton value="Kullanıcıyı Ekle" action="#{userBean.persist()}" ajax="false" />
+
+                                    </h:panelGrid>
+                                </h:form>
+                            </p:dialog>
+                        </h:form>
+                    </div>
                 </div>
-            </div>
+                <!--Login Sonu--> 
+                <h:form id="navigationForm">
+                <div id="navigation" class="block">
+                        <p:toolbar id="tb">
+                            <p:toolbarGroup align="left">
+                                <p:commandButton value="Anasayfa" action="/home.xhtml"/>
+                                <p:commandButton value="Hakkımızda" action="#{contentAdminBean.findContentById(2)}" update="@form"/>
+                                <p:commandButton value="Bilgilendirme" action="#{contentAdminBean.findContentById(3)}"/>
+                                <p:commandButton value="Örnek Sayfa" action="#{contentAdminBean.findContentById(4)}"/>
+                                <p:commandButton value="İletişim" action="#{contentAdminBean.findContentById(5)}" styleClass="last"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
 
-            <div id="navigation" class="block">
-                <p:commandButton value="Anasayfa" />
-                <p:commandButton value="Hakkımızda"/>
-                <p:commandButton value="Bilgilendirme"/>
-                <p:commandButton value="Örnek Sayfa"/>
-                <p:commandButton value="İletişim" styleClass="last"/>
+                        <p:sticky target="tb"/>
 
-                <div class="clear"></div>
-            </div>
+                        <div class="clear"></div>
+                </div>
 
-            <div id="leftMenu" class="block">sol menü</div>
+                <div id="leftMenu" class="block">sol menü</div>
 
-            <div id="content" class="block">
-                <ui:insert name="content">Content</ui:insert>
-            </div>
+                <div id="content" class="block">
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
+        </h:form>
+
         </div>
 
         <div class="clear"></div>
@@ -97,9 +109,10 @@
 
         <div id="footer">
             <div id="footInner">
-                footer
+                FOOTER
             </div>
         </div>
+        </h:form>
     </h:body>
 </html>
 

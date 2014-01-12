@@ -7,7 +7,7 @@
         <ui:composition template="mkmTemplate.xhtml">
             <ui:define name="content">
                 This is a home content...
-                <h:outputText value="#{contentBean.findContentById(1)}" escape="false" />
+                <h:outputText value="#{contentAdminBean.content.contentHtml}" escape="false" />
             </ui:define>
         </ui:composition>
     </h:body>
